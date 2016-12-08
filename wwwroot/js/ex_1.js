@@ -53,3 +53,4 @@
      const max = getMinMax(Math.max, arr);
      return sumRange(min, max, 0);
  };
+ sumAll( [1, 4] );
