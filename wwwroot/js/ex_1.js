@@ -32,25 +32,33 @@
  // }
  // sumAll([1, 4]);
 
-/*
- * Functional answer
- */
- // Uses Math.min / Math.max to get range from array
- const getMinMax = ( mathFn, arr) => {
-     return mathFn( ...arr );
- };
- // increment from min to max
- // Recursion to sum all nums in range of min to max
- const sumRange = (min, max, acc) => {
-     if (min > max) {
-         return acc;
-     }
-     return sumRange(min + 1, max, acc + min);
- };
- // return sum of all numbers
- const sumAll = (arr) => {
-     const min = getMinMax(Math.min, arr);
-     const max = getMinMax(Math.max, arr);
-     return sumRange(min, max, 0);
- };
- sumAll( [1, 4] );
+// /*
+//  * Functional answer
+//  */
+const sumAll = (arr) => {
+    // return sum of all numbers
+    // Uses Math.min / Math.max to get range from array
+    const getMinMax = mathFn => arr => mathFn( ...arr );
+
+    const min = getMinMax( Math.min );
+    const max = getMinMax( Math.max );
+
+    // increment from min to max
+    // Recursion to sum all nums in range of min to max
+    // Returns the value of acc ( sum of num in range)
+    const sumRange = (min, max, acc) => {
+        if (min > max) {
+            return acc;
+        }
+        return sumRange(min + 1, max, acc + min);
+    };
+    // return the result
+    // return sumRange(min(arr), max(arr), 0); // comment out if using module
+
+    Expose the function through a module
+    const _sumRange = sumRange(min(arr), max(arr), 0);
+    const module = {
+        sumRange: _sumRange
+    };
+    return module;
+};
